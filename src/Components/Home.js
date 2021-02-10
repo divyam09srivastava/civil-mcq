@@ -1,20 +1,19 @@
 import React ,{useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import firebase from "./Firebase/index";
-
+import "./Home.css"
+import { Button } from '@material-ui/core';
 
 
 
 export default function Home() {
     const [question,setQuestion] = React.useState([]);
+    const [answer,setAnswer]=React.useState(null);
     var data;
     useEffect(() => {
 
         const fetchdata = async () => {
-          
-          
-          
-          await firebase.db
+           await firebase.db
             .collection("questions")
             .get()
             .then((querySnapshot) => {
@@ -25,38 +24,32 @@ export default function Home() {
                setQuestion(data);
             });
         };
-        // const fetchquestion = async() =>
-        // {
-        //     const response=firebase.db
-        //     .collection("questions");
-        //     const data=await response.get();
-        //     console.log(data)
-        //     data.docs.forEach(item=>{
-        //      setQuestion([...question,item.data()])
-             
-        //     })
-            
-        // };
           fetchdata();
-        //   fetchquestion();
+        
     },[]);
 
     return (
         
        <> 
        
-       <h2 className="d-flex justify-content-center" style={{color:"blue"}}>{question[0].category}</h2>
+       <h2 className="d-flex justify-content-center" style={{color:"blue"}}>Building-Materials</h2>
+       <br></br>
       {
           
          question && question.map(ques=>{
           return(
             <div className="ques-container">
               <p>{ques.id}. {ques.question}</p>
-              <p>A. {ques.optionA}</p>
-              <p>B. {ques.optionB}</p>
-              <p>C. {ques.optionC}</p>
-              <p>D. {ques.optionD}</p>
-              <p style={{color:"green"}}>Correct : {ques.correct}</p>
+             
+              <p><span className="question-style">A.</span> <span>{ques.optionA}</span></p>
+              <p><span className="question-style">B.</span> <span>{ques.optionB}</span></p>
+              <p><span className="question-style">C.</span> <span>{ques.optionC}</span></p>
+              <p><span className="question-style">D.</span> <span>{ques.optionD}</span></p>
+              <br>
+              </br>
+              {answer===ques.id?<p style={{color:"green",fontFamily:"Montserrat",fontSize:"Larger"}}>{ques.correct}</p>:<></>}
+              <Button variant="outlined" style={{background:"white",color:"blue",border:"1",fontWeight:"bold"}} onClick={()=>{setAnswer(ques.id)}}>View Answer</Button>
+              <br></br>
             </div>
           )
         })

@@ -13,10 +13,8 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
   }
+ 
   
  
 }));
@@ -31,7 +29,7 @@ export default function Header() {
           {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton> */}
-          <Typography variant="h3" className={classes.title}>
+          <Typography variant="h3" className="title">
             CIVIL-MCQ
           </Typography>
           <h4 className="para">Sections</h4>

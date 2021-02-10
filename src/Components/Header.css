@@ -7,6 +7,11 @@
 
 
 }
+.title
+{
+    flex-grow: 1;
+
+}
 @media only screen and (max-width: 768px) {
    h4.para
    {
@@ -14,5 +19,7 @@
        margin-right: 5px;
 font-size: 80%;
    }
-    }
+   
+
+}
   
