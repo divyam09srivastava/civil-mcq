@@ -1,0 +1,11 @@
+.ques-container
+{
+    background: hsl(0, 0%, 100%);
+    width: 80%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  font-family: Montserrat;
+  
+}
