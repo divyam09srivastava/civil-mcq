@@ -80,6 +80,68 @@ class Firebase {
       });
   }
 
+
+  addTopics(
+    Topicname,
+    countsection
+  ) {
+    const data = {
+      Topicname,
+      countsection,
+    uid: new Date().getTime(),
+    };
+
+    // adding data here
+    this.db
+      .collection("Topics")
+      .doc(data.uid.toString())
+      .set(data)
+      .then(() => {
+        // NotificationManager.success("A new user has been added", "Success");
+        alert("Success : New Topic Added");
+        // window.location = "/";
+      })
+      .catch((error) => {
+        // NotificationManager.error(error.message, "Create user failed");
+        alert("Failure : New Question NOT Added" + "  " + error);
+        // this.setState({ isSubmitting: false });
+      });
+  }
+
+  
+  addTopics2(
+    Topicname2,
+    countsection2
+  ) {
+    const data = {
+      Topicname2,
+      countsection2,
+    uid: new Date().getTime(),
+    };
+
+    // adding data here
+    this.db
+      .collection("Topics2")
+      .doc(data.uid.toString())
+      .set(data)
+      .then(() => {
+        // NotificationManager.success("A new user has been added", "Success");
+        alert("Success : New Topic Added");
+        // window.location = "/";
+      })
+      .catch((error) => {
+        // NotificationManager.error(error.message, "Create user failed");
+        alert("Failure : New Question NOT Added" + "  " + error);
+        // this.setState({ isSubmitting: false });
+      });
+  }
+
+
+
+
+
+
+
   
 
   isInitialized() {

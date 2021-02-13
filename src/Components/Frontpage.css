@@ -1,0 +1,15 @@
+.topics
+{
+    display:flex;
+    flex-direction : column;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+.formargin
+{
+    margin-top: 5px;
+    margin-bottom: 6px;
+}

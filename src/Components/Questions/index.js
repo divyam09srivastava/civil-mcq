@@ -73,7 +73,7 @@ correct
       <div>
       <TextField
           id="standard-multiline-flexible"
-          label="Multiline"
+          label="Question--ID"
           multiline
           placeholder="Id"
           rowsMax={4}
@@ -82,7 +82,7 @@ correct
         />
         <TextField
           id="standard-multiline-static"
-          label="Multiline"
+          label="Questions"
           multiline
           rows={4}
           placeholder="Question"
@@ -91,7 +91,7 @@ correct
         />
          <TextField
           id="standard-multiline-flexible"
-          label="Multiline"
+          label="Category"
           multiline
           placeholder="Category"
           rowsMax={4}
@@ -103,7 +103,7 @@ correct
       <div>
         <TextField
           id="filled-multiline-flexible"
-          label="Multiline"
+          label="Aoption"
           multiline
           rowsMax={4}
           placeholder="OptionA"
@@ -113,7 +113,7 @@ correct
         />
         <TextField
           id="filled-textarea"
-          label="Multiline Placeholder"
+          label="Boption"
           placeholder="OptionB"
           multiline
           value={optionB}
@@ -122,7 +122,7 @@ correct
         />
         <TextField
           id="filled-multiline-static"
-          label="Multiline"
+          label="Coption"
           multiline
           rows={4}
           placeholder="optionc"
@@ -132,7 +132,7 @@ correct
         />
         <TextField
           id="filled-multiline-static"
-          label="Multiline"
+          label="Doption"
           multiline
           rows={4}
           placeholder="optiond"
@@ -142,7 +142,7 @@ correct
         />
         <TextField
           id="filled-multiline-static"
-          label="Multiline"
+          label="Correct-answer"
           multiline
           rows={4}
           placeholder="correct answer"
