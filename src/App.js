@@ -7,6 +7,7 @@ import Frontpage from "./Components/Frontpage"
 import Section1 from "./Components/Buildingmaterialcomp/Section1"
 import Addtopics from "./Components/Addtopics"
 import Addtopics2 from "./Components/Addtopic2"
+import Section2 from "./Components/Buildingmaterialcomp/Section2"
 function App() {
   return (
     <BrowserRouter>
@@ -25,8 +26,11 @@ function App() {
       <Route exact path="/addtopics2">
         <Addtopics2/>
       </Route>
-      <Route exact path="/:topic">
+      <Route exact path="/1/:topic">
         <Section1 />
+      </Route>
+      <Route exact path="/2/:topic">
+        <Section2 />
       </Route>
       <Route exact path="/:topic/:section">
        <Section1 />

@@ -59,7 +59,7 @@ function Frontpage({history}) {
                     topics.map(topic=>
                         {
                             return(
-                            <Link className="formargin" to={`/${topic.Topicname}`}><CollectionsBookmarkIcon/>{topic.Topicname}</Link> 
+                            <Link className="formargin" to={`/1/${topic.Topicname}`}><CollectionsBookmarkIcon/>{topic.Topicname}</Link> 
                             )
                         })
                 }
@@ -69,7 +69,7 @@ function Frontpage({history}) {
                     topicstwo.map(topictwo=>
                         {
                             return(
-                            <Link className="formargin" to={`/${topictwo.Topicname2}`}><CollectionsBookmarkIcon/>{topictwo.Topicname2}</Link> 
+                            <Link className="formargin" to={`/2/${topictwo.Topicname2}`}><CollectionsBookmarkIcon/>{topictwo.Topicname2}</Link> 
                             )
                         })
                 }
