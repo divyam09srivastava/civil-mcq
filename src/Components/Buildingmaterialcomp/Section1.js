@@ -12,6 +12,8 @@ import ForwardIcon from '@material-ui/icons/Forward';
 import {withRouter,useParams} from "react-router-dom";
 import _ from "underscore";
 import $ from 'jquery';
+import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+
 
 function Section1({history}) {
   const {sec}=useParams();
@@ -67,7 +69,7 @@ function Section1({history}) {
          fetchdata();
          fetchdata2();
          $("ul li.active").removeClass('active');
-        $('ul li#'+currentPage).addClass('active');
+         $('ul li#'+currentPage).addClass('active');
 
           
         
@@ -78,42 +80,50 @@ function Section1({history}) {
     const handleClick = (event) => {
       let listid = Number(event.target.id);
       
-        setCurrentPage(listid)
+      setCurrentPage(listid)
       $("ul li.active").removeClass('active');
       $('ul li#'+listid).addClass('active');
       setPrevAndNextBtnClass(listid);
     }
 
-    const setPrevAndNextBtnClass= (listid) => {
+    const setPrevAndNextBtnClass = (listid) => {
       let totalPage = Math.ceil(question.length / todosPerPage);
-      setIsNextBtnActive('disabled');  //({isNextBtnActive: 'disabled'});
-      setIsPrevBtnActive('disabled');
+      // setIsNextBtnActive('disabled');  
+      // setIsPrevBtnActive('disabled');
       if(totalPage === listid && totalPage > 1){
           setIsPrevBtnActive('');
+          setIsNextBtnActive('disabled'); 
       }
       else if(listid === 1 && totalPage > 1){
-          setIsNextBtnActive('');  //({isNextBtnActive: ''});
+          setIsNextBtnActive('');  
+          setIsPrevBtnActive('disabled');
       }
       else if(totalPage > 1){
-          setIsNextBtnActive('');  //({isNextBtnActive: ''});
-          setIsPrevBtnActive('');  //({isPrevBtnActive: ''});
+          setIsNextBtnActive('');  
+          setIsPrevBtnActive('');  
       }
-  }
+      else{
+        setIsNextBtnActive('disabled');  
+      setIsPrevBtnActive('disabled');
+      }
+    }
 
-    const btnIncrementClick = () => {
+  const btnIncrementClick = () => {
       setUpperPageBound(upperPageBound + pageBound);
+      console.log(upperPageBound)
       setLowerPageBound (lowerPageBound + pageBound);
       let listid = upperPageBound + 1;
-      setCurrentPage(listid);   //({ currentPage: listid});
-      setPrevAndNextBtnClass(listid);
+      setCurrentPage(listid);   
+       setPrevAndNextBtnClass(listid);
+      
   }
 
   const btnDecrementClick = () => {
-    setUpperPageBound(upperPageBound - pageBound);
-    setLowerPageBound (lowerPageBound - pageBound);
+  setUpperPageBound(upperPageBound - pageBound);
+  setLowerPageBound (lowerPageBound - pageBound);
   
   let listid = upperPageBound - pageBound;
-  setCurrentPage(listid);  //({ currentPage: listid});
+  setCurrentPage(listid);  
   setPrevAndNextBtnClass(listid);
   }
 
@@ -125,7 +135,7 @@ function Section1({history}) {
         
     }
     let listid = currentPage - 1;
-    setCurrentPage(listid);  //({ currentPage: listid});
+    setCurrentPage(listid); 
     setPrevAndNextBtnClass(listid);
     
 }
@@ -137,17 +147,16 @@ const btnNextClick = ()=> {
       
   }
   let listid = currentPage + 1;
-  setCurrentPage(listid);  //({ currentPage: listid});
+  setCurrentPage(listid);  
   setPrevAndNextBtnClass(listid);
   
 }
 
     const sections = () =>
     {
-      
       let card = [];
       _.times(section, (i) => {
-        card.push(    <Link className="formargin1" to={`/1/${topics.Topicname}/${i+1}`}><ForwardIcon/>{topic} - Section {i+1}</Link>);
+        card.push(<Link className="formargin1" to={`/1/${topics.Topicname}/${i+1}`}><ForwardIcon/>{topic} - Section {i+1}</Link>);
       });
       return(
         <>
@@ -214,36 +223,58 @@ const btnNextClick = ()=> {
         const renderPageNumbers = pageNumbers.map(number => {
             if(number === 1 && currentPage === 1){
                 return(
-                    <li key={number} className='active' id={number}><a href='' id={number} onClick={(e)=>{setCurrentPage(e.target.id)}}>{number}</a></li>
+                    // <li key={number} className='active' id={number}><a id={number} onClick={(e)=>{handleClick(e)}}>{number}</a></li>
+                    <PaginationItem active id={number} key={number}>
+                      <PaginationLink  id={number} onClick={(e)=>{handleClick(e)}}>
+                        {number}
+                      </PaginationLink>
+                    </PaginationItem>
                 )
             }
             else if((number < upperPageBound + 1) && number > lowerPageBound){
                 return(
-                    <li key={number} id={number}><a id={number} onClick={(e)=>{setCurrentPage(e.target.id)}}>{number}</a></li>
+                    // <li key={number} id={number}><a id={number} onClick={(e)=>{handleClick(e)}}>{number}</a></li>
+                    <PaginationItem key={number} id={number}>
+                      <PaginationLink id={number} onClick={(e)=>{handleClick(e)}}>
+                        {number}
+                      </PaginationLink>
+                    </PaginationItem>
                 )
             }
         });
         let pageIncrementBtn = null;
         if(pageNumbers.length > upperPageBound){
-            pageIncrementBtn = <li className=''><a onClick={btnIncrementClick()}> &hellip; </a></li>
+            pageIncrementBtn = <li className=''><a onClick={()=>{btnIncrementClick()}}> &hellip; </a></li>
         }
         let pageDecrementBtn = null;
         if(lowerPageBound >= 1){
-            pageDecrementBtn = <li className=''><a onClick={btnDecrementClick()}> &hellip; </a></li>
+            pageDecrementBtn = <li className=''><a onClick={()=>{btnDecrementClick()}}> &hellip; </a></li>
         }
         let renderPrevBtn = null;
         if(isPrevBtnActive === 'disabled') {
-            renderPrevBtn = <li className={isPrevBtnActive}><span id="btnPrev"> Prev </span></li>
+            // renderPrevBtn = <li className={isPrevBtnActive}><span id="btnPrev"> Prev </span></li>
+            renderPrevBtn = <PaginationItem disabled>
+              <PaginationLink previous />
+            </PaginationItem>
         }
         else{
-            renderPrevBtn = <li className={isPrevBtnActive}><a href='' id="btnPrev" onClick={btnPrevClick()}> Prev </a></li>
+            // renderPrevBtn = <li className={isPrevBtnActive}><a id="btnPrev" onClick={()=>{btnPrevClick()}}> Prev </a></li>
+            renderPrevBtn = <PaginationItem>
+            <PaginationLink previous onClick={()=>{btnPrevClick()}} />
+          </PaginationItem>
         }
         let renderNextBtn = null;
         if(isNextBtnActive === 'disabled') {
-            renderNextBtn = <li className={isNextBtnActive}><span id="btnNext"> Next </span></li>
+            // renderNextBtn = <li className={isNextBtnActive}><span id="btnNext"> Next </span></li>
+            renderNextBtn = <PaginationItem disabled>
+            <PaginationLink next />
+          </PaginationItem>
         }
         else{
-            renderNextBtn = <li className={isNextBtnActive}><a href='' id="btnNext" onClick={btnNextClick()}> Next </a></li>
+            //renderNextBtn = <li className={isNextBtnActive}><a  id="btnNext" onClick={()=>{btnNextClick()}}> Next </a></li>
+            renderNextBtn = <PaginationItem>
+            <PaginationLink next onClick={()=>{btnNextClick()}} />
+          </PaginationItem>
         }
 
 
@@ -298,13 +329,15 @@ const btnNextClick = ()=> {
             
             {/* <ul className="Pagination"id="page-numbers">
               {renderPageNumbers} */}
-              <ul className="pagination">
-               {renderPrevBtn}
-              {pageDecrementBtn}
+              {/* <ul className="pagination"> */}
+              <Pagination>
+              {renderPrevBtn}
+              {/* {pageDecrementBtn} */}
               {renderPageNumbers}
-              {pageIncrementBtn}
+              {/* {pageIncrementBtn} */}
               {renderNextBtn}
-            </ul>
+              </Pagination>
+            {/* </ul> */}
           </div>  
         
    </div>     
