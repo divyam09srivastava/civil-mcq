@@ -1,6 +1,8 @@
 import app from "firebase/app";
 import "firebase/auth";
 import "firebase/firebase-firestore";
+import 'firebase/storage';
+
 
 const config = {
    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -15,11 +17,13 @@ const config = {
   
 };
 
+
 class Firebase {
   constructor() {
     app.initializeApp(config);
     this.auth = app.auth();
     this.db = app.firestore();
+    this.storage = app.storage();
   }
 
   dbreturns() {
@@ -40,11 +44,12 @@ class Firebase {
 //       displayName: name,
 //     });
 //   }
-
+  
   addQuestion(
     id,
     question,
     category,
+    sec,
     optionA,
     optionB,
     optionC,
@@ -55,6 +60,7 @@ class Firebase {
         id,
     question,
     category,
+      sec,
     optionA,
     optionB,
     optionC,

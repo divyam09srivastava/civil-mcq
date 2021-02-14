@@ -32,7 +32,7 @@ function App() {
       <Route exact path="/2/:topic">
         <Section2 />
       </Route>
-      <Route exact path="/:topic/:section">
+      <Route exact path="/1/:topic/:sec">
        <Section1 />
       </Route>
 

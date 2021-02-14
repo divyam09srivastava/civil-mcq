@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
@@ -28,11 +28,17 @@ export default function MultilineTextFields() {
   const [id, setId] = React.useState("");
   const [question, setQuestion] = React.useState("");
   const [category, setCategory] = React.useState("");
+  const [sec, setSec] = React.useState("");
   const [optionA, setOptionA] = React.useState("");
   const [optionB, setOptionB] = React.useState("");
   const [optionC, setOptionC] = React.useState("");
   const [optionD, setOptionD] = React.useState("");
   const [correct, setCorrect] = React.useState("");
+
+
+
+
+
 
 
 
@@ -42,6 +48,7 @@ export default function MultilineTextFields() {
         id,
     question,
     category,
+    sec,
     optionA,
     optionB,
     optionC,
@@ -53,6 +60,7 @@ correct
       
       setQuestion("");
       setCategory("");
+      setSec("");
       setOptionA("");
       setOptionB("");
       setOptionC("");
@@ -69,6 +77,7 @@ correct
   
 
   return (
+    <>
     <form className={classes.root} noValidate autoComplete="off">
       <div>
       <TextField
@@ -97,6 +106,15 @@ correct
           rowsMax={4}
           value={category}
           onChange={(e)=>{setCategory(e.target.value)}}
+        />
+        <TextField
+          id="standard-multiline-flexible"
+          label="Section Number"
+          multiline
+          placeholder="Section number"
+          rowsMax={4}
+          value={sec}
+          onChange={(e)=>{setSec(e.target.value)}}
         />
         
       </div>
@@ -153,5 +171,7 @@ correct
       </div>
       <Button onClick={()=>{onSubmit()}}>ADD</Button>
     </form>
+ 
+  </>
   );
 }

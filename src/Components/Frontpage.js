@@ -42,7 +42,7 @@ function Frontpage({history}) {
           fetchdata();
           fetchdata2();
         
-    },[]);
+    },);
 
 
     return (
@@ -59,7 +59,7 @@ function Frontpage({history}) {
                     topics.map(topic=>
                         {
                             return(
-                            <Link className="formargin" to={`/1/${topic.Topicname}`}><CollectionsBookmarkIcon/>{topic.Topicname}</Link> 
+                            <Link className="formargin" to={`/1/${topic.Topicname}/1`}><CollectionsBookmarkIcon/>{topic.Topicname}</Link> 
                             )
                         })
                 }

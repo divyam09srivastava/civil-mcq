@@ -1,4 +1,4 @@
-import React ,{useEffect} from 'react'
+import React ,{useEffect,useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import firebase from "../Firebase/index";
 import "./section1.css"
@@ -11,24 +11,27 @@ import {withRouter,useParams} from "react-router-dom";
 import _ from "underscore";
 
 function Section1({history}) {
+  const {sec}=useParams();
   const {topic}=useParams();
     const [question,setQuestion] = React.useState([]);
     const [answer,setAnswer]=React.useState(null);
     const [topics,setTopics] = React.useState([]);
     const [section,setSections]=React.useState(null);
     var data;
+    console.log(topic);
+    console.log(sec);
     useEffect(() => {
 
         const fetchdata = async () => {
            await firebase.db
             .collection("questions")
             .where("category","==",`${topic}`)
+            .where("sec","==",`${sec}`)
             .get()
             .then((querySnapshot) => {
                data = querySnapshot.docs.map((doc) => doc.data());
                console.log(data);
                console.log(data[0]);
-            //   console.log(RandomNumber);
                setQuestion(data);
             });
         };
@@ -54,7 +57,7 @@ function Section1({history}) {
 
           
         
-    },[]);
+    },[sec]);
 
     
     const sections = () =>
@@ -62,7 +65,7 @@ function Section1({history}) {
       
       let card = [];
       _.times(section, (i) => {
-        card.push(    <Link className="formargin1" to={`/${topics.Topicname}/${i+1}`}><ForwardIcon/>{topic} - Section {i+1}</Link>);
+        card.push(    <Link className="formargin1" to={`/1/${topics.Topicname}/${i+1}`}><ForwardIcon/>{topic} - Section {i+1}</Link>);
       });
       return(
         <>
@@ -83,9 +86,9 @@ function Section1({history}) {
                 <Breadcrumb.Item active  style={{color:"green"}}>Section 1</Breadcrumb.Item>
             </Breadcrumb>
             
-            <div className="row d-flex justify-content-center"> 
+            <div className="row"> 
             <div className=" sectionbox">
-            <h3 class="overview" style={{fontSize:"20px",fontFamily:"arial",fontWeight:"bold"}}><span class="ib-gray">Exercise :: </span>{topic} - Section 1</h3>
+            <h3 class="overview"><span class="ib-gray">Exercise :: </span>{topic} - Section 1</h3>
             { sections() }
             </div>
             </div> 

@@ -83,9 +83,9 @@ function Section2({history}) {
                 <Breadcrumb.Item active  style={{color:"green"}}>Section 1</Breadcrumb.Item>
             </Breadcrumb>
             
-            <div className="row d-flex justify-content-center"> 
+            <div className="row"> 
             <div className=" sectionbox">
-            <h3 class="overview" style={{fontSize:"20px",fontFamily:"arial",fontWeight:"bold"}}><span class="ib-gray">Exercise :: </span>{topic} - Section 1</h3>
+            <h3 class="overview" ><span class="ib-gray">Exercise :: </span>{topic} - Section 1</h3>
             { sections() }
             </div>
             </div> 
