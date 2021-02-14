@@ -17,6 +17,8 @@ function Section1({history}) {
     const [answer,setAnswer]=React.useState(null);
     const [topics,setTopics] = React.useState([]);
     const [section,setSections]=React.useState(null);
+    const[todosPerPage,setTodosPerPage]= React.useState(3);
+    const[currentPage,setCurrentPage]= React.useState(1);
     var data;
     console.log(topic);
     console.log(sec);
@@ -74,6 +76,51 @@ function Section1({history}) {
       )
 
     }
+        console.log(question);
+        const indexOfLastTodo = currentPage * todosPerPage;
+        const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+        const currentTodos = question.slice(indexOfFirstTodo, indexOfLastTodo);
+        
+        console.log(indexOfLastTodo)
+        
+        console.log(currentTodos)
+
+        const renderTodos = currentTodos.map((ques, index) => {
+          return [<div className="ques-container" >
+          <p>{ques.id}. {ques.question}</p>
+           <div className="options">
+          <p><span className="question-style">A.</span> <span>{ques.optionA}</span></p>
+          <p><span className="question-style">B.</span> <span>{ques.optionB}</span></p>
+          <p><span className="question-style">C.</span> <span>{ques.optionC}</span></p>
+          <p><span className="question-style">D.</span> <span>{ques.optionD}</span></p>
+          
+          </div>
+          {answer===ques.id?<p style={{color:"green",fontSize:"15px",fontFamily:"arial",fontWeight:"bold"}}>{ques.correct}</p>:<></>}
+
+          <Button variant="outlined" style={{background:"white",color:"#007bff",border:"1",fontWeight:"bold"}} onClick={()=>{setAnswer(ques.id)}}>View Answer</Button>
+          <hr className="solid"></hr>
+          </div>];
+
+        });
+
+
+        const pageNumbers = [];
+        for (let i = 1; i <= Math.ceil(question.length / todosPerPage); i++) {
+          pageNumbers.push(i);
+        }
+
+        const renderPageNumbers = pageNumbers.map(number => {
+          return (
+            <li
+              key={number}
+              id={number}
+              onClick={(e)=>{setCurrentPage(e.target.id)}}
+              // onClick={this.handleClick}
+            >
+              {number}
+            </li>
+          );
+        });
 
     return (
       <>
@@ -94,7 +141,7 @@ function Section1({history}) {
             </div> 
             
              
-      {
+      {/* {
           
          question && question.map(ques=>{
           return(
@@ -116,9 +163,22 @@ function Section1({history}) {
             
           )
         })
-      }
+
+      } */}
+
+          <div>
+            
+            
+              {renderTodos}
+            
+            <ul id="page-numbers">
+              {renderPageNumbers}
+            </ul>
+          </div>  
         
-   </div>
+   </div>     
+   
+
  </>
             
     );

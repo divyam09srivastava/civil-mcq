@@ -42,7 +42,7 @@ function Frontpage({history}) {
           fetchdata();
           fetchdata2();
         
-    },);
+    },[]);
 
 
     return (
