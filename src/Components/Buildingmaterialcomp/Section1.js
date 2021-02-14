@@ -9,6 +9,7 @@ import Header from "../header"
 import ForwardIcon from '@material-ui/icons/Forward';
 import {withRouter,useParams} from "react-router-dom";
 import _ from "underscore";
+// import $ from 'jquery';
 
 function Section1({history}) {
   const {sec}=useParams();
@@ -19,6 +20,12 @@ function Section1({history}) {
     const [section,setSections]=React.useState(null);
     const[todosPerPage,setTodosPerPage]= React.useState(3);
     const[currentPage,setCurrentPage]= React.useState(1);
+    
+    // const[upperPageBound,setUpperPageBound]= React.useState(3);
+    // const[lowerPageBound,setLowerPageBound]= React.useState(0);
+    // const[isPrevBtnActive,setIsPrevBtnActive]= React.useState('disabled');
+    // const[isNextBtnActive,setIsNextBtnActive]= React.useState('');
+    // const[pageBound,setPageBound]= React.useState(2);
     var data;
     console.log(topic);
     console.log(sec);
@@ -35,6 +42,7 @@ function Section1({history}) {
                console.log(data);
                console.log(data[0]);
                setQuestion(data);
+               setCurrentPage(1);
             });
         };
           var data2;
@@ -56,12 +64,82 @@ function Section1({history}) {
        };
          fetchdata();
          fetchdata2();
+        //  $("ul li.active").removeClass('active');
+        // $('ul li#'+currentPage).addClass('active');
 
           
         
     },[sec]);
 
+
     
+//     const handleClick = (event) => {
+//       let listid = Number(event.target.id);
+      
+//         setCurrentPage(listid)
+//       $("ul li.active").removeClass('active');
+//       $('ul li#'+listid).addClass('active');
+//       setPrevAndNextBtnClass(listid);
+//     }
+
+//     const setPrevAndNextBtnClass= (listid) => {
+//       let totalPage = Math.ceil(question.length / todosPerPage);
+//       setIsNextBtnActive('disabled');  //({isNextBtnActive: 'disabled'});
+//       setIsPrevBtnActive('disabled');
+//       if(totalPage === listid && totalPage > 1){
+//           setIsPrevBtnActive('');
+//       }
+//       else if(listid === 1 && totalPage > 1){
+//           setIsNextBtnActive('');  //({isNextBtnActive: ''});
+//       }
+//       else if(totalPage > 1){
+//           setIsNextBtnActive('');  //({isNextBtnActive: ''});
+//           setIsPrevBtnActive('');  //({isPrevBtnActive: ''});
+//       }
+//   }
+
+//     const btnIncrementClick = () => {
+//       setUpperPageBound(upperPageBound + pageBound);
+//       setLowerPageBound (lowerPageBound + pageBound);
+//       let listid = upperPageBound + 1;
+//       setCurrentPage(listid);   //({ currentPage: listid});
+//       setPrevAndNextBtnClass(listid);
+//   }
+
+//   const btnDecrementClick = () => {
+//     setUpperPageBound(upperPageBound - pageBound);
+//     setLowerPageBound (lowerPageBound - pageBound);
+  
+//   let listid = upperPageBound - pageBound;
+//   setCurrentPage(listid);  //({ currentPage: listid});
+//   setPrevAndNextBtnClass(listid);
+//   }
+
+
+//   const btnPrevClick = () => {
+//     if((currentPage -1)% pageBound === 0 ){
+//         setUpperPageBound(upperPageBound - pageBound);
+//         setLowerPageBound (lowerPageBound - pageBound);
+        
+//     }
+//     let listid = currentPage - 1;
+//     setCurrentPage(listid);  //({ currentPage: listid});
+//     setPrevAndNextBtnClass(listid);
+    
+// }
+
+// const btnNextClick = ()=> {
+//   if((currentPage +1) > upperPageBound ){
+//       setUpperPageBound(upperPageBound + pageBound);
+//       setLowerPageBound(lowerPageBound + pageBound);
+      
+//   }
+//   let listid = currentPage + 1;
+//   setCurrentPage(listid);  //({ currentPage: listid});
+//   setPrevAndNextBtnClass(listid);
+  
+// }
+
     const sections = () =>
     {
       
@@ -122,6 +200,48 @@ function Section1({history}) {
           );
         });
 
+
+        // const pageNumbers = [];
+        // for (let i = 1; i <= Math.ceil(question.length / todosPerPage); i++) {
+        //   pageNumbers.push(i);
+        // }
+
+        // const renderPageNumbers = pageNumbers.map(number => {
+        //     if(number === 1 && currentPage === 1){
+        //         return(
+        //             <li key={number} className='active' id={number}><a href='' id={number} onClick={(e)=>{handleClick(e)}}>{number}</a></li>
+        //         )
+        //     }
+        //     else if((number < upperPageBound + 1) && number > lowerPageBound){
+        //         return(
+        //             <li key={number} id={number}><a href='' id={number} onClick={(e)=>{handleClick(e)}}>{number}</a></li>
+        //         )
+        //     }
+        // });
+        // let pageIncrementBtn = null;
+        // if(pageNumbers.length > upperPageBound){
+        //     pageIncrementBtn = <li className=''><a href='' onClick={btnIncrementClick()}> &hellip; </a></li>
+        // }
+        // let pageDecrementBtn = null;
+        // if(lowerPageBound >= 1){
+        //     pageDecrementBtn = <li className=''><a href='' onClick={btnDecrementClick()}> &hellip; </a></li>
+        // }
+        // let renderPrevBtn = null;
+        // if(isPrevBtnActive === 'disabled') {
+        //     renderPrevBtn = <li className={isPrevBtnActive}><span id="btnPrev"> Prev </span></li>
+        // }
+        // else{
+        //     renderPrevBtn = <li className={isPrevBtnActive}><a href='' id="btnPrev" onClick={btnPrevClick()}> Prev </a></li>
+        // }
+        // let renderNextBtn = null;
+        // if(isNextBtnActive === 'disabled') {
+        //     renderNextBtn = <li className={isNextBtnActive}><span id="btnNext"> Next </span></li>
+        // }
+        // else{
+        //     renderNextBtn = <li className={isNextBtnActive}><a href='' id="btnNext" onClick={btnNextClick()}> Next </a></li>
+        // }
+
+
     return (
       <>
       <Header />
@@ -173,7 +293,14 @@ function Section1({history}) {
             
             <ul id="page-numbers">
               {renderPageNumbers}
+              {/* <ul className="pagination"> */}
+              {/* {renderPrevBtn}
+              {pageDecrementBtn}
+              {renderPageNumbers}
+              {pageIncrementBtn}
+              {renderNextBtn} */}
             </ul>
+            {/* </ul> */}
           </div>  
         
    </div>     
