@@ -8,6 +8,8 @@ import Section1 from "./Components/Buildingmaterialcomp/Section1"
 import Addtopics from "./Components/Addtopics"
 import Addtopics2 from "./Components/Addtopic2"
 import Section2 from "./Components/Buildingmaterialcomp/Section2"
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   return (
     <BrowserRouter>
